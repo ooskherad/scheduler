@@ -8,7 +8,7 @@ class UserAdmin(BaseUserAdmin):
     # todo : create user_creation form
     list_display = ('created_at', 'mobile', 'name', 'email', 'is_admin', 'is_superuser', 'is_active')
     fieldsets = (
-        ('main', {'fields': ('email', 'mobile')}),
+        ('main', {'fields': ('email', 'mobile', 'profile_image')}),
         ('permissions', {'fields': ('is_active', 'last_login', 'groups', 'user_permissions', 'is_superuser')}),
     )
     ordering = ('created_at',)

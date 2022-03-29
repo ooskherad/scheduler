@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(dotenv_path=BASE_DIR/'.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -35,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # third party apps
     'rest_framework',
     'rest_framework.authtoken',
+    'storages',
+
+    # local apps
     'accounts.apps.AccountsConfig',
     'reservation.apps.ReservationConfig',
     'scheduler.apps.SchedulerConfig',
@@ -140,3 +148,21 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
+# ARVAN CLOUD STORAGE CONFIG
+# DEFAULT_FILE_STORAGE = os.getenv('DEFAULT_FILE_STORAGE')
+# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+# AWS_SERVICE_NAME = os.getenv('AWS_SERVICE_NAME')
+# AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL')
+# AWS_S3_FILE_OVERWRITE = os.getenv('AWS_S3_FILE_OVERWRITE')
+
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+AWS_ACCESS_KEY_ID = '8270b3f0-0edb-43c3-8216-deaa9e39d284'
+AWS_SECRET_ACCESS_KEY = '1772a3418b68726975d1665db0dbaa643f9c44bedb8ad0a795a861dffb5b6504'
+AWS_STORAGE_BUCKET_NAME = 'uniprojects'
+AWS_SERVICE_NAME = 's3'
+AWS_S3_ENDPOINT_URL = 'https://s3.ir-thr-at1.arvanstorage.com'
+AWS_S3_FILE_OVERWRITE = False

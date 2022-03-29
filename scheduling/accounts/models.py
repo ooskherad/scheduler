@@ -12,6 +12,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_of_birth = models.DateField(default=None)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    profile_image = models.ImageField(default='default.jpeg')
 
     USERNAME_FIELD = 'mobile'
     objects = UserManager()
