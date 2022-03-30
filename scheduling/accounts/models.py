@@ -20,7 +20,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.mobile
 
-
     @property
     def is_staff(self):
         return self.is_admin
+
+
+class OtpCode(models.Model):
+    mobile = models.CharField(max_length=11)
+    code = models.SmallIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.code} -> {self.mobile}'
