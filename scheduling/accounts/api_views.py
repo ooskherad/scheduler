@@ -59,8 +59,8 @@ class UserUpdateView(APIView):
         if not self.user:
             return Response(self.errors, status=status.HTTP_404_NOT_FOUND)
         self.check_object_permissions(request, self.user)
-        data = UserSerializer(instance=self.user, data=request.data, partial=True)
-        if data.is_valid():
-            data.save()
-            return Response(data.data, status=status.HTTP_200_OK)
-        return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)
+        user = UserSerializer(instance=self.user, data=request.data, partial=True)
+        if user.is_valid():
+            user.save()
+            return Response(user.data, status=status.HTTP_200_OK)
+        return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)

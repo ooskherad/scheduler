@@ -14,6 +14,15 @@ class UserSerializer(serializers.ModelSerializer):
         data = validated_data
         return User.objects.create_user(**validated_data)
 
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            if attr =='password':
+                instance.set_password(value)
+            else:
+                setattr(instance, attr, value)
+        instance.save()
+        return instance
+
     def validate_mobile(self, mobile):
         valid_mobile = re.search("^09\d{9}$", mobile)
         if not valid_mobile:
