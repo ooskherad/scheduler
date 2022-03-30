@@ -1,5 +1,6 @@
-from rest_framework import routers
-from accounts import api_views
+from accounts.urls import api_urlpatterns
+from django.urls import path, include
 
-router = routers.DefaultRouter()
-# router.register('/test/', api_views.test)
+api_urls = [
+    path('accounts/', include(api_urlpatterns))
+]
