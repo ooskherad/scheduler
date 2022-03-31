@@ -17,7 +17,7 @@ services:
 
 
   app:
-    build: ./scheduling
+    build: .
     command: sh -c "python manage.py migrate && gunicorn scheduling.wsgi -b 0.0.0.0:8000"
     container_name: app
     volumes:
@@ -25,7 +25,7 @@ services:
     depends_on:
       - postgres
     expose:
-      - ":8000"
+      - "8000"
     networks:
       - main
     restart: on-failure
