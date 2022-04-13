@@ -5,7 +5,7 @@ from .managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    name = models.CharField(max_length=25, null=True, blank=True)
+    name = models.CharField(max_length=25, default=None, null=True)
     mobile = models.CharField(max_length=11, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     email = models.EmailField(null=True, blank=True)
@@ -31,4 +31,4 @@ class OtpCode(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.code} -> {self.mobile}'
+        return f'{self.code} -> {self.mobile} -> {self.created_at}'
