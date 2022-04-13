@@ -26,7 +26,7 @@ load_dotenv(dotenv_path=BASE_DIR.parent / '.env')
 SECRET_KEY = 'django-insecure-b3jlxfwnk8j*r7)($+w5k-zxue-wiv86+9zcng-u)*sky(ph3('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -81,15 +81,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'scheduling.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -136,6 +127,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 # python3 manage.py collectstatic
 STATIC_ROOT = BASE_DIR / 'static'
+# STATICFILES_DIRS = [BASE_DIR / "static",]
+# STATICFILES_DIRS = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
