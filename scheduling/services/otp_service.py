@@ -22,7 +22,7 @@ class OtpService:
     def check_code(cls, mobile, code):
         otp = cls.get_otp_object(mobile)
         if otp and otp.code == code and cls.check_deadline(otp):
-            return True
+            return otp
 
     @classmethod
     def check_deadline(cls, obj):

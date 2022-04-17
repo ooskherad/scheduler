@@ -7,9 +7,8 @@ app_name = "accounts"
 api_urlpatterns = [
     path('register', UserRegistrationView.as_view()),
     path('verify_otp', UserRegistrationVerifyOtpView.as_view()),
-    path('login', UserLogin.as_view()),
     path('user/<int:id>', UserUpdateView.as_view()),
-
+    path('profile', UserProfile.as_view(), name='profile'),
     # path('token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
     # path('token/verify', TokenVerifyView.as_view(), name='token_verify'),
@@ -17,5 +16,6 @@ api_urlpatterns = [
 ]
 
 urlpatterns = [
-    path('profile', UserProfile.as_view(), name='profile'),
+    path('login', UserLogin.as_view()),
+
 ]

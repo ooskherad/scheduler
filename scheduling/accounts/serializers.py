@@ -34,3 +34,7 @@ class UserSerializer(serializers.ModelSerializer):
         if password is None:
             raise serializers.ValidationError('password validations')
         return password
+
+    def get_user(self):
+        return User(self)
+
