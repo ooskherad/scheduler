@@ -2,6 +2,7 @@ import random
 
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
+from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -25,7 +26,8 @@ class UserLogin(APIView):
             user = authenticate(username=data['mobile'], password=data['password'])
             if user is not None:
                 login(request, user)
-                return Response(status=status.HTTP_200_OK)
+                token = Token.objects.get_or_create(user=user)
+                return Response(data={'token': token[0].__str__()}, status=status.HTTP_200_OK)
             else:
                 return Response(data={'detail': 'Wrong UserName or password'}, status=status.HTTP_401_UNAUTHORIZED)
         except KeyError as exception:
@@ -39,7 +41,8 @@ class UserRegistrationVerifyOtpView(APIView):
         if OtpService.check_code(user_session['mobile'], int(request.data['code'])):
             User.objects.create_user(mobile=user_session['mobile'], password=user_session['password'])
             OtpCode.objects.filter(mobile=user_session['mobile']).delete()
-            return Response(status=status.HTTP_201_CREATED)
+            token = Token.objects.get_or_create(user=user)
+            return Response(data={'token': token[0].__str__()}, status=status.HTTP_201_CREATED)
         return Response(data={'details': 'Wrong Code'}, status=status.HTTP_400_BAD_REQUEST)
 
 
