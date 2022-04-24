@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'storages',
+    'corsheaders',
 
     # local apps
     'accounts.apps.AccountsConfig',
@@ -59,6 +60,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:80',
+    'http://localhost:8000',
 ]
 
 ROOT_URLCONF = 'scheduling.urls'
@@ -164,4 +171,3 @@ EMAIL_HOST_PASSWORD = ''
 
 KAVENEGAR_API_KEY = os.getenv('KAVENEGAR_API_KEY')
 KAVENEGAR_SENDER = '100047778'
-
