@@ -7,4 +7,5 @@ gunicorn
 pillow
 python-dotenv
 psycopg2-binary
+kavenegar
 django-cors-headers
